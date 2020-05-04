@@ -4,6 +4,11 @@ class Cell:
         self.y = _y - 1
 
 
+def ending_trim(x):
+    res = " " * (len(str(n)) - len(str(x))) + ">"
+    return res
+
+
 TGREEN = '\033[32m'   # Gas
 TBLUE = '\033[36m'    # Path
 TRED = '\033[31m'     # Wall
@@ -21,10 +26,14 @@ for i in range(n):
 
 symbol = {"gas": chr(36), "star": '*', "path": '.', "wall": '#'}
 
+for _ in range(0, n + len(str(n)) + 1):
+    print("|", end="")
+print()
 for i in range(n):
+    print(i + 1, end=ending_trim(i + 1))
     for j in range(m):
         if i == start_cell.x and j == start_cell.y:
-            print(TWHITE + "0",end="")
+            print(TWHITE + "0", end="")
             continue
         if Grid2D[i][j] == 0:
             print(TRED + symbol["wall"], end="")
